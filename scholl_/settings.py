@@ -59,7 +59,6 @@ INSTALLED_APPS = [
 
     # packages
     'rest_framework',
-    'phonenumbers',
     'drf_yasg',
     "corsheaders",
 ]
