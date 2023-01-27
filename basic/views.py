@@ -32,7 +32,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def get_register_course(self):
     snippets = RegistrationCourse.objects.all()
     serializer = RegistrationCourseSerializer(snippets, many=True)
