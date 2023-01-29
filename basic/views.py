@@ -36,6 +36,6 @@ def get_register_course(self):
 #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class RegisterCourseViewSet(generics.ListCreateAPIView):
+class RegisterCourseViewSet(generics.CreateAPIView):
     queryset = RegistrationCourse.objects.all()
     serializer_class = RegistrationCourseSerializer
