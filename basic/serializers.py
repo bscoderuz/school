@@ -24,7 +24,7 @@ class RegistrationCourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RegistrationCourse
-        fields = ['full_name', 'phone_number', 'course']
+        fields = ['id', 'full_name', 'phone_number', 'course']
 
     def create(self, validated_data):
         name = validated_data.pop("course")

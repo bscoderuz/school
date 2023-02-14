@@ -1,24 +1,23 @@
-from rest_framework.permissions import AllowAny
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework import generics
 from .serializers import UserSerializer, RegisterSerializer
 from .models import Users
-from rest_framework.authentication import TokenAuthentication
-from rest_framework import generics
+from .serializers import MyTokenObtainPairSerializer
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
-# Class based view to Get User Details using Token Authentication
-class UserDetailAPI(APIView):
-    authentication_classes = (TokenAuthentication,)
+class MyObtainTokenPairView(TokenObtainPairView):
     permission_classes = (AllowAny,)
-
-    def get(self, request, *args, **kwargs):
-        user = Users.objects.get(id=request.user.id)
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
+    serializer_class = MyTokenObtainPairSerializer
 
 
-# Class based view to register user
-class RegisterUserAPIView(generics.CreateAPIView):
+class UsersView(generics.ListAPIView):
+    queryset = Users.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UserSerializer
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = Users.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
